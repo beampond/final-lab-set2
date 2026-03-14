@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "bcryptjs": "^3.0.3"
+  },
+  "name": "final-lab-set1",
+  "version": "1.0.0",
+  "description": "**วิชา:** ENGSE207 Software Architecture   **มหาวิทยาลัย:** มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrTanapat/final-lab-set1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrTanapat/final-lab-set1/issues"
+  },
+  "homepage": "https://github.com/MrTanapat/final-lab-set1#readme",
+  "keywords": []
+}
