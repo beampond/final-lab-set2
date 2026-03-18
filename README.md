@@ -15,9 +15,61 @@
 
 | Service          | URL                                               |
 | ---------------- | ------------------------------------------------- |
-| Auth Service     | `final-lab-set2-production.up.railway.app`        |
-| Task Service     | `final-lab-set2-production-cb3b.up.railway.app`   |
-| Activity Service | `activity-service-production-c044.up.railway.app` |
+| Auth Service     | `https://final-lab-set2-production.up.railway.app`        |
+| Task Service     | `https://final-lab-set2-production-cb3b.up.railway.app`   |
+| Activity Service | `https://activity-service-production-c044.up.railway.app` |
+
+---
+
+## 📋 สิ่งที่เปลี่ยนจาก Set 1
+
+| Set 1 | Set 2 |
+|---|---|
+| 4 services: auth, task, log, frontend | 3 services บน Cloud: auth, task, activity |
+| Shared PostgreSQL (1 DB) | Database-per-Service (3 DB แยก) |
+| Log Service แยก | แต่ละ service log ลง DB ของตัวเอง + ส่ง event ไป Activity Service |
+| ไม่มี Register | มี Register API ใน Auth Service |
+| Local-only (HTTPS + Nginx) | Deploy บน Railway (HTTPS อัตโนมัติ) |
+
+---
+
+## 📁 โครงสร้าง Repository
+```
+final-lab-set2/
+├── README.md
+├── TEAM_SPLIT.md
+├── INDIVIDUAL_REPORT_675432100310.md
+├── INDIVIDUAL_REPORT_665432100113.md
+├── docker-compose.yml
+├── .env.example
+├── auth-service/
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── init.sql              ← auth-db schema + seed users
+│   └── src/
+│       ├── index.js
+│       ├── db/db.js
+│       ├── middleware/jwtUtils.js
+│       └── routes/auth.js    ← login + register + logActivity()
+├── task-service/
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── init.sql              ← task-db schema
+│   └── src/
+│       ├── index.js
+│       ├── middleware/authMiddleware.js
+│       └── routes/tasks.js   ← CRUD + logActivity()
+├── activity-service/
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── init.sql              ← activity-db schema
+│   └── src/index.js
+├── frontend/
+│   ├── index.html            ← Task Board + Register tab
+│   ├── activity.html         ← Activity Timeline
+│   └── config.js             ← Railway Service URLs
+└── screenshots/
+```
 
 ---
 
@@ -56,6 +108,26 @@ Browser / Postman
 | `TASK_CREATED`        | task-service | POST /tasks สำเร็จ            |
 | `TASK_STATUS_CHANGED` | task-service | PUT /tasks/:id เปลี่ยน status |
 | `TASK_DELETED`        | task-service | DELETE /tasks/:id             |
+
+---
+
+## 🔗 Service-to-Service Call
+```
+ผู้ใช้ Register / Login
+    │
+    ▼
+Auth Service ── POST /api/activity/internal ──▶ Activity Service
+(บันทึกลง auth-db)                              (บันทึกลง activity-db)
+
+ผู้ใช้ CRUD Task
+    │
+    ▼
+Task Service ── POST /api/activity/internal ──▶ Activity Service
+(บันทึกลง task-db)                              (บันทึกลง activity-db)
+```
+
+> การส่ง event เป็นแบบ **fire-and-forget** — ถ้า Activity Service ล่ม  
+> Auth Service และ Task Service **ยังทำงานได้ปกติ**
 
 ---
 
