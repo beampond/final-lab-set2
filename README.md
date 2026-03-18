@@ -13,11 +13,11 @@
 
 ## 🌐 Railway URLs
 
-| Service          | URL                                     |
-| ---------------- | --------------------------------------- |
-| Auth Service     | `https://[auth-url].up.railway.app`     |
-| Task Service     | `https://[task-url].up.railway.app`     |
-| Activity Service | `https://[activity-url].up.railway.app` |
+| Service          | URL                                               |
+| ---------------- | ------------------------------------------------- |
+| Auth Service     | `final-lab-set2-production.up.railway.app`        |
+| Task Service     | `final-lab-set2-production-cb3b.up.railway.app`   |
+| Activity Service | `activity-service-production-c044.up.railway.app` |
 
 ---
 
@@ -71,7 +71,7 @@ Browser / Postman
 **วิธีแก้:** เก็บ `username` ไว้ใน `activities` table ณ เวลาที่ event เกิดขึ้น  
 แม้จะซ้ำซ้อนกับ `auth-db` แต่ทำให้ query ได้โดยไม่ต้อง JOIN ข้าม database
 
-### Fire-and-Forget Pattern — ใช้ที่ไหนในระบบ
+### Fire-and-Forget Pattern — ใช้ที่ไหนในระบบ (Bonus B1)
 
 `logActivity()` ใน auth-service และ task-service ใช้ pattern นี้:
 
@@ -94,9 +94,9 @@ Frontend เรียก URL ของแต่ละ service โดยตรง
 
 ```javascript
 window.APP_CONFIG = {
-  AUTH_URL: "https://[auth-url].up.railway.app",
-  TASK_URL: "https://[task-url].up.railway.app",
-  ACTIVITY_URL: "https://[activity-url].up.railway.app",
+  AUTH_URL: "https://final-lab-set2-production.up.railway.app",
+  TASK_URL: "https://final-lab-set2-production-cb3b.up.railway.app",
+  ACTIVITY_URL: "https://activity-service-production-c044.up.railway.app",
 };
 ```
 
@@ -141,24 +141,24 @@ Services จะขึ้นที่:
 
 ### Auth Service
 
-| Variable               | Value                                   | หมายเหตุ                 |
-| ---------------------- | --------------------------------------- | ------------------------ |
-| `DATABASE_URL`         | `${{auth-db.DATABASE_URL}}`             | Railway inject อัตโนมัติ |
-| `JWT_SECRET`           | `engse207-sec2-set2-grpup1`             | ต้องเหมือนกันทุก service |
-| `JWT_EXPIRES`          | `1h`                                    |                          |
-| `PORT`                 | `3001`                                  |                          |
-| `NODE_ENV`             | `production`                            |                          |
-| `ACTIVITY_SERVICE_URL` | `https://[activity-url].up.railway.app` |                          |
+| Variable               | Value                                      | หมายเหตุ                 |
+| ---------------------- | ------------------------------------------ | ------------------------ |
+| `DATABASE_URL`         | `${{auth-db.DATABASE_URL}}`                | Railway inject อัตโนมัติ |
+| `JWT_SECRET`           | `engse207-sec2-set2-grpup1`                | ต้องเหมือนกันทุก service |
+| `JWT_EXPIRES`          | `1h`                                       |                          |
+| `PORT`                 | `3001`                                     |                          |
+| `NODE_ENV`             | `production`                               |                          |
+| `ACTIVITY_SERVICE_URL` | `final-lab-set2-production.up.railway.app` |                          |
 
 ### Task Service
 
-| Variable               | Value                                   | หมายเหตุ                 |
-| ---------------------- | --------------------------------------- | ------------------------ |
-| `DATABASE_URL`         | `${{task-db.DATABASE_URL}}`             | Railway inject อัตโนมัติ |
-| `JWT_SECRET`           | `engse207-sec2-set2-grpup1`             | ต้องเหมือนกันทุก service |
-| `PORT`                 | `3002`                                  |                          |
-| `NODE_ENV`             | `production`                            |                          |
-| `ACTIVITY_SERVICE_URL` | `https://[activity-url].up.railway.app` |                          |
+| Variable               | Value                                           | หมายเหตุ                 |
+| ---------------------- | ----------------------------------------------- | ------------------------ |
+| `DATABASE_URL`         | `${{task-db.DATABASE_URL}}`                     | Railway inject อัตโนมัติ |
+| `JWT_SECRET`           | `engse207-sec2-set2-grpup1`                     | ต้องเหมือนกันทุก service |
+| `PORT`                 | `3002`                                          |                          |
+| `NODE_ENV`             | `production`                                    |                          |
+| `ACTIVITY_SERVICE_URL` | `final-lab-set2-production-cb3b.up.railway.app` |                          |
 
 ### Activity Service
 
@@ -174,9 +174,9 @@ Services จะขึ้นที่:
 ## 🧪 วิธีทดสอบ (Cloud)
 
 ```bash
-AUTH_URL="https://[auth-url].up.railway.app"
-TASK_URL="https://[task-url].up.railway.app"
-ACTIVITY_URL="https://[activity-url].up.railway.app"
+AUTH_URL="https://final-lab-set2-production.up.railway.app"
+TASK_URL="https://final-lab-set2-production-cb3b.up.railway.app"
+ACTIVITY_URL="https://activity-service-production-c044.up.railway.app"
 
 # T1: Health Check
 curl $AUTH_URL/api/auth/health
