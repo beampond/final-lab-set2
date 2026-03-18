@@ -13,18 +13,21 @@
 
 ### Student 1: ธนภัทร นุกูล — Backend
 
-- Auth Service (login, JWT, logEvent)
-- Task Service (CRUD, authMiddleware, logEvent)
-- Log Service (internal endpoint, GET logs, stats)
-- Database Schema (init.sql, bcrypt hash)
-- Nginx (nginx.conf, HTTPS, rate limit, gen-certs.sh)
-- Docker Compose (docker-compose.yml, .env.example, Dockerfiles)
+- Auth Service: เพิ่ม Register API + logActivity() + logToDB()
+- Task Service: เพิ่ม logActivity() ใน CRUD routes ทุกตัว
+- Activity Service: สร้างใหม่ทั้งหมด (POST /internal, GET /me, GET /all)
+- แก้ db.js ทุก service ให้ใช้ DATABASE_URL
+- docker-compose.yml: ปรับเป็น Database-per-Service (3 DB แยก)
+- Deploy auth-service, task-service, activity-service บน Railway
+- README.md (ร่วมกัน)
+- Screenshots (ร่วมกัน)
 
 ### Student 2: นายณัฏธพงษ์ เรือนเทศ — Frontend
 
-- Task Board UI (frontend/index.html)
-- Log Dashboard (frontend/logs.html)
-- Frontend Dockerfile
+- ปรับ index.html: เพิ่ม Register form, ลบ Profile tab, ลบ Log Dashboard
+- เพิ่ม config.js สำหรับ Railway Service URLs
+- สร้าง activity.html: Activity Timeline page
+- ปรับ URL ทุก fetch ให้ใช้ AUTH, TASK, ACTIVITY จาก config.js
 - README.md (ร่วมกัน)
 - Screenshots (ร่วมกัน)
 
