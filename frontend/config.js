@@ -11,7 +11,7 @@ window.APP_CONFIG = {
 
   // ── Railway Cloud ───────────────────────────────────────
   // แก้ URL ด้านล่างให้ตรงกับ Railway project ของกลุ่มคุณ
-  AUTH_URL:     'https://auth-service-xxxx.up.railway.app',
-  TASK_URL:     'https://task-service-xxxx.up.railway.app',
-  ACTIVITY_URL: 'https://activity-service-xxxx.up.railway.app',
+  AUTH_URL: "https://final-lab-set2-production.up.railway.app",
+  TASK_URL: "https://final-lab-set2-production-cb3b.up.railway.app",
+  ACTIVITY_URL: "https://activity-service-production-c044.up.railway.app",
 };
